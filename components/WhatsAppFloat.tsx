@@ -30,10 +30,11 @@ export default function WhatsAppFloat() {
       }}
       whileHover={{ scale: 1.08 }}
       whileTap={{ scale: 0.94 }}
-      className="fixed bottom-6 right-6 z-30 flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] text-white sm:h-[68px] sm:w-[68px]"
+      className="fixed bottom-6 right-6 z-30 flex h-20 w-20 items-center justify-center rounded-full bg-[#25D366] text-white sm:h-24 sm:w-24"
     >
       <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-70 animate-ping" />
-      <WhatsAppIcon size={30} className="relative z-10" />
+      <WhatsAppIcon size={40} className="relative z-10 sm:hidden" />
+      <WhatsAppIcon size={48} className="relative z-10 hidden sm:block" />
     </motion.a>
   );
 }

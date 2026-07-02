@@ -25,6 +25,9 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden border-b border-gold-500/10">
+      <div className="absolute inset-0 lg:hidden">
+        <HeroSlideshow variant="background" showDots={false} />
+      </div>
       <BubbleField count={16} />
       <div className="container-elite relative z-10 grid min-h-[90vh] items-center gap-12 py-28 lg:grid-cols-[1.15fr_0.85fr]">
         <motion.div variants={container} initial="hidden" animate="show" className="max-w-none">
