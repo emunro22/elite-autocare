@@ -64,12 +64,12 @@ export default function Navbar() {
       <div className="container-elite flex h-28 items-center justify-between">
         <Link href="/" className="group flex items-center gap-3" onClick={() => setOpen(false)}>
           {!logoError && (
-            <span className="relative h-16 w-16 shrink-0 sm:h-20 sm:w-20">
+            <span className="relative h-20 w-20 shrink-0 sm:h-24 sm:w-24 lg:h-28 lg:w-28">
               <Image
                 src="/images/logo-badge.png"
                 alt="Elite Autocare"
                 fill
-                sizes="80px"
+                sizes="112px"
                 className="object-contain"
                 onError={() => setLogoError(true)}
               />
@@ -114,15 +114,6 @@ export default function Navbar() {
             <Phone size={17} />
             07946 089 183
           </a>
-          <a
-            href={WHATSAPP_HREF}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Message us on WhatsApp"
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-[#25D366] text-navy-950 transition-transform hover:scale-105"
-          >
-            <WhatsAppIcon size={20} />
-          </a>
           <Link
             href="/booking"
             className="rounded-sm border border-gold-500 bg-gold-500/10 px-6 py-3 text-base font-medium tracking-wide text-gold-300 transition-colors hover:bg-gold-500 hover:text-navy-950"
@@ -149,7 +140,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 bottom-0 top-28 z-40 overflow-y-auto border-t border-gold-500/10 bg-navy-900/98 backdrop-blur-xl md:hidden"
+            className="fixed inset-x-0 bottom-0 top-28 z-40 overflow-y-auto border-t border-gold-500/10 bg-navy-900 md:hidden"
           >
             <div className="container-elite flex flex-col gap-1 py-8">
               {links.map((link, i) => (
