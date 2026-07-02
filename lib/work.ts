@@ -57,6 +57,7 @@ export const workItems: WorkItem[] = [
     category: "Interior",
     before: "/images/work/10.jpg",
     after: "/images/work/11.jpg",
+    featured: true,
   },
   {
     slug: "cupra-formentor-exterior",
@@ -91,6 +92,7 @@ export const workItems: WorkItem[] = [
     category: "Interior",
     before: "/images/work/26.jpg",
     after: "/images/work/27.jpg",
+    featured: true,
   },
 ];
 

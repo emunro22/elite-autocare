@@ -14,21 +14,21 @@ export default function MyWork() {
         title="See the difference for yourself"
         description="Drag the slider on any photo to see how each car looked before and after an Elite Autocare valet."
       />
-      <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-14 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
         {featuredWork.map((item) => (
           <div key={item.slug}>
             <BeforeAfterSlider before={item.before} after={item.after} alt={item.vehicle} />
-            <p className="mt-4 font-display text-lg font-semibold text-mist-100">{item.vehicle}</p>
-            <p className="text-sm text-mist-500">{item.title}</p>
+            <p className="mt-5 font-display text-xl font-semibold text-mist-100">{item.vehicle}</p>
+            <p className="mt-1 text-base text-mist-500">{item.title}</p>
           </div>
         ))}
       </div>
-      <div className="mt-10">
+      <div className="mt-12">
         <Link
           href="/gallery"
-          className="inline-flex items-center gap-2 text-sm font-medium text-gold-400 hover:text-gold-300"
+          className="inline-flex items-center gap-2 text-base font-medium text-gold-400 hover:text-gold-300"
         >
-          View the full gallery <ArrowRight size={15} />
+          View the full gallery <ArrowRight size={17} />
         </Link>
       </div>
     </section>

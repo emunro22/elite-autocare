@@ -21,12 +21,12 @@ export default function SectionHeading({
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className={align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}
     >
-      <span className="eyebrow gold-underline pb-2 inline-block">{eyebrow}</span>
-      <h2 className="mt-4 font-display text-3xl font-bold text-mist-100 sm:text-4xl">
+      <span className="eyebrow gold-underline pb-2 inline-block text-sm">{eyebrow}</span>
+      <h2 className="mt-5 font-display text-4xl font-bold leading-[1.1] text-mist-100 sm:text-5xl">
         {title}
       </h2>
       {description && (
-        <p className="mt-4 text-base leading-relaxed text-mist-300">{description}</p>
+        <p className="mt-5 text-lg leading-relaxed text-mist-300">{description}</p>
       )}
     </motion.div>
   );

@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import SectionHeading from "@/components/SectionHeading";
 import PackageCard from "@/components/PackageCard";
 import MyWork from "@/components/MyWork";
+import BrandIllustration from "@/components/BrandIllustration";
 import { packages, packageNote } from "@/lib/services";
 import { areas } from "@/lib/areas";
 
@@ -74,10 +75,10 @@ export default function HomePage() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-full border border-gold-500/40 bg-gold-500/5 text-gold-400">
                   <step.icon size={20} />
                 </div>
-                <h3 className="mt-5 font-display text-lg font-semibold text-mist-100">
+                <h3 className="mt-5 font-display text-xl font-semibold text-mist-100">
                   {step.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-mist-500">{step.text}</p>
+                <p className="mt-2 text-base leading-relaxed text-mist-500">{step.text}</p>
               </div>
             ))}
           </div>
@@ -98,10 +99,10 @@ export default function HomePage() {
               href={`/areas/${area.slug}`}
               className="group flex items-center justify-between rounded-sm border border-mist-500/15 bg-navy-800/40 px-6 py-5 transition-colors hover:border-gold-500/50"
             >
-              <span className="text-sm font-medium text-mist-100 group-hover:text-gold-300">
+              <span className="text-base font-medium text-mist-100 group-hover:text-gold-300">
                 {area.name}
               </span>
-              <ArrowRight size={15} className="text-mist-500 group-hover:text-gold-400" />
+              <ArrowRight size={16} className="text-mist-500 group-hover:text-gold-400" />
             </Link>
           ))}
         </div>
@@ -109,20 +110,23 @@ export default function HomePage() {
 
       {/* CTA */}
       <section className="border-t border-gold-500/10">
-        <div className="container-elite flex flex-col items-center gap-6 py-24 text-center">
-          <span className="eyebrow">Ready when you are</span>
-          <h2 className="max-w-2xl font-display text-3xl font-bold text-mist-100 sm:text-4xl">
-            Book your Elite Autocare valet in under two minutes
-          </h2>
-          <Link
-            href="/booking"
-            className="group relative mt-2 inline-flex items-center justify-center gap-2 overflow-hidden rounded-sm bg-gold-500 px-9 py-4 text-sm font-semibold tracking-wide text-navy-950 shadow-gold"
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              Book Now <ArrowRight size={16} />
-            </span>
-            <span className="absolute inset-0 -translate-x-full bg-gold-sheen transition-transform duration-700 ease-out group-hover:translate-x-full" />
-          </Link>
+        <div className="container-elite grid items-center gap-12 py-24 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="flex flex-col items-center gap-6 text-center lg:items-start lg:text-left">
+            <span className="eyebrow text-sm">Ready when you are</span>
+            <h2 className="max-w-2xl font-display text-4xl font-bold leading-[1.1] text-mist-100 sm:text-5xl">
+              Book your Elite Autocare valet in under two minutes
+            </h2>
+            <Link
+              href="/booking"
+              className="group relative mt-2 inline-flex items-center justify-center gap-2 overflow-hidden rounded-sm bg-gold-500 px-10 py-5 text-base font-semibold tracking-wide text-navy-950 shadow-gold"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                Book Now <ArrowRight size={18} />
+              </span>
+              <span className="absolute inset-0 -translate-x-full bg-gold-sheen transition-transform duration-700 ease-out group-hover:translate-x-full" />
+            </Link>
+          </div>
+          <BrandIllustration className="hidden aspect-[4/3] w-full lg:block" />
         </div>
       </section>
     </>

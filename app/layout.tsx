@@ -49,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en-GB" className={`${display.variable} ${body.variable}`}>
       <body className="font-body bg-navy-900 text-mist-100 antialiased selection:bg-gold-500">
-        <div className="relative min-h-screen overflow-x-hidden bg-navy-900 bg-navy-radial">
+        <div className="relative min-h-screen bg-navy-900 bg-navy-radial">
           <Navbar />
           <main>{children}</main>
           <Footer />
