@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { areas } from "@/lib/areas";
 import FooterLogo from "./FooterLogo";
+import WhatsAppIcon from "./WhatsAppIcon";
+import { WHATSAPP_HREF } from "@/lib/contact";
 
 export default function Footer() {
   return (
@@ -25,6 +27,14 @@ export default function Footer() {
           <div className="mt-6 flex flex-col gap-3 text-base text-mist-300">
             <a href="tel:07946089183" className="flex items-center gap-2 hover:text-gold-400">
               <Phone size={16} /> 07946 089 183
+            </a>
+            <a
+              href={WHATSAPP_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-gold-400"
+            >
+              <WhatsAppIcon size={16} /> WhatsApp us
             </a>
             <a
               href="mailto:eliteautocare10@icloud.com"

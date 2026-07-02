@@ -44,7 +44,7 @@ select:focus-visible {
 }
 
 .container-elite {
-  @apply mx-auto w-full max-w-6xl px-6 md:px-10;
+  @apply mx-auto w-full max-w-[1680px] px-6 md:px-12 xl:px-20;
 }
 
 .eyebrow {

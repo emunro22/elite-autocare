@@ -27,7 +27,7 @@ export default function Hero() {
     <section className="relative overflow-hidden border-b border-gold-500/10">
       <BubbleField count={16} />
       <div className="container-elite relative z-10 grid min-h-[90vh] items-center gap-12 py-28 lg:grid-cols-[1.15fr_0.85fr]">
-        <motion.div variants={container} initial="hidden" animate="show" className="max-w-3xl">
+        <motion.div variants={container} initial="hidden" animate="show" className="max-w-none">
           <motion.span variants={item} className="eyebrow inline-flex items-center gap-2 text-sm">
             <Sparkles size={15} className="text-gold-400" />
             Mobile Valeting &amp; Detailing &mdash; Glasgow

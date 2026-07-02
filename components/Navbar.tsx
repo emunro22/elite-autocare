@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 import clsx from "clsx";
+import WhatsAppIcon from "./WhatsAppIcon";
+import { WHATSAPP_HREF } from "@/lib/contact";
 
 const links = [
   { href: "/services", label: "Services" },
@@ -59,15 +61,15 @@ export default function Navbar() {
           : "border-gold-500/10 bg-navy-900/70 backdrop-blur-md"
       )}
     >
-      <div className="container-elite flex h-24 items-center justify-between">
+      <div className="container-elite flex h-28 items-center justify-between">
         <Link href="/" className="group flex items-center gap-3" onClick={() => setOpen(false)}>
           {!logoError && (
-            <span className="relative h-12 w-12 shrink-0 sm:h-14 sm:w-14">
+            <span className="relative h-16 w-16 shrink-0 sm:h-20 sm:w-20">
               <Image
                 src="/images/logo-badge.png"
                 alt="Elite Autocare"
                 fill
-                sizes="56px"
+                sizes="80px"
                 className="object-contain"
                 onError={() => setLogoError(true)}
               />
@@ -112,6 +114,15 @@ export default function Navbar() {
             <Phone size={17} />
             07946 089 183
           </a>
+          <a
+            href={WHATSAPP_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Message us on WhatsApp"
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-[#25D366] text-navy-950 transition-transform hover:scale-105"
+          >
+            <WhatsAppIcon size={20} />
+          </a>
           <Link
             href="/booking"
             className="rounded-sm border border-gold-500 bg-gold-500/10 px-6 py-3 text-base font-medium tracking-wide text-gold-300 transition-colors hover:bg-gold-500 hover:text-navy-950"
@@ -138,7 +149,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 bottom-0 top-24 z-40 overflow-y-auto border-t border-gold-500/10 bg-navy-900/98 backdrop-blur-xl md:hidden"
+            className="fixed inset-x-0 bottom-0 top-28 z-40 overflow-y-auto border-t border-gold-500/10 bg-navy-900/98 backdrop-blur-xl md:hidden"
           >
             <div className="container-elite flex flex-col gap-1 py-8">
               {links.map((link, i) => (
@@ -165,6 +176,14 @@ export default function Navbar() {
                 className="mt-6 flex items-center gap-3 px-3 py-3 text-lg text-mist-300"
               >
                 <Phone size={19} /> 07946 089 183
+              </a>
+              <a
+                href={WHATSAPP_HREF}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-3 py-3 text-lg text-mist-300"
+              >
+                <WhatsAppIcon size={20} className="text-[#25D366]" /> Message us on WhatsApp
               </a>
               <Link
                 href="/booking"
