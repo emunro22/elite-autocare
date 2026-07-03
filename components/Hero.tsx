@@ -29,7 +29,7 @@ export default function Hero() {
         <HeroSlideshow variant="background" showDots={false} />
       </div>
       <BubbleField count={16} />
-      <div className="container-elite relative z-10 grid min-h-[80vh] items-center gap-12 py-20 lg:grid-cols-[1.15fr_0.85fr]">
+      <div className="container-elite relative z-10 grid min-h-[80vh] items-center gap-12 py-20 lg:h-[calc(100vh-7rem)] lg:min-h-0 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10 lg:py-10">
         <motion.div variants={container} initial="hidden" animate="show" className="max-w-none">
           <motion.span variants={item} className="eyebrow inline-flex items-center gap-2 text-sm">
             <Sparkles size={15} className="text-gold-400" />
@@ -38,7 +38,7 @@ export default function Hero() {
 
           <motion.h1
             variants={item}
-            className="mt-4 font-display text-5xl font-bold leading-[1.02] text-mist-100 sm:text-6xl md:text-7xl"
+            className="mt-4 font-display text-5xl font-bold leading-[1.02] text-mist-100 sm:text-6xl md:text-7xl lg:text-6xl xl:text-7xl"
           >
             A showroom finish,
             <br />
@@ -47,13 +47,13 @@ export default function Hero() {
             </span>
           </motion.h1>
 
-          <motion.p variants={item} className="mt-8 max-w-xl text-xl leading-relaxed text-mist-300">
+          <motion.p variants={item} className="mt-8 max-w-xl text-xl leading-relaxed text-mist-300 lg:mt-6 lg:text-lg">
             Elite Autocare brings professional valeting and detailing to your
             driveway, office car park or home &mdash; snow foam washes, paint
             protection, and interior deep cleans, all in one visit.
           </motion.p>
 
-          <motion.div variants={item} className="mt-11 flex flex-col gap-4 sm:flex-row">
+          <motion.div variants={item} className="mt-11 flex flex-col gap-4 sm:flex-row lg:mt-8">
             <Link
               href="/booking"
               className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-sm bg-gold-500 px-10 py-5 text-base font-semibold tracking-wide text-navy-950 shadow-gold"
@@ -71,7 +71,7 @@ export default function Hero() {
             </Link>
           </motion.div>
 
-          <motion.div variants={item} className="mt-16 flex flex-wrap gap-x-10 gap-y-4 text-base text-mist-500">
+          <motion.div variants={item} className="mt-16 flex flex-wrap gap-x-10 gap-y-4 text-base text-mist-500 lg:mt-8">
             <span>Silver from <strong className="text-mist-100">&pound;60</strong></span>
             <span className="h-4 w-px bg-mist-500/30" />
             <span>Gold from <strong className="text-mist-100">&pound;80</strong></span>
@@ -84,7 +84,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-          className="relative hidden aspect-[4/5] w-full lg:block"
+          className="relative hidden aspect-[4/5] w-full lg:block lg:max-h-[46vh] xl:max-h-[52vh]"
         >
           <div className="absolute -inset-6 rounded-sm bg-gold-500/10 blur-3xl" />
           <HeroSlideshow />

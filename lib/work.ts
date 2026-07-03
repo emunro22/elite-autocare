@@ -42,15 +42,6 @@ export const workItems: WorkItem[] = [
     after: "/images/work/6.jpg",
   },
   {
-    slug: "scania-tipper-cab",
-    title: "Cab interior deep clean",
-    vehicle: "Scania 420P Tipper",
-    category: "Interior",
-    before: "/images/work/12.jpg",
-    after: "/images/work/14.jpg",
-    featured: true,
-  },
-  {
     slug: "cupra-formentor-exterior",
     title: "Exterior wash & finish",
     vehicle: "Cupra Formentor",
