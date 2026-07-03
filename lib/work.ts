@@ -32,14 +32,7 @@ export const workItems: WorkItem[] = [
     category: "Interior",
     before: "/images/work/3.jpg",
     after: "/images/work/4.jpg",
-  },
-  {
-    slug: "transit-custom-front-interior",
-    title: "Front cab interior detail",
-    vehicle: "Ford Transit Custom",
-    category: "Interior",
-    before: "/images/work/5.jpg",
-    after: "/images/work/6.jpg",
+    featured: true,
   },
   {
     slug: "cupra-formentor-exterior",
@@ -49,14 +42,6 @@ export const workItems: WorkItem[] = [
     before: "/images/work/15.jpg",
     after: "/images/work/16.jpg",
     featured: true,
-  },
-  {
-    slug: "cupra-formentor-front-interior",
-    title: "Front interior detail",
-    vehicle: "Cupra Formentor",
-    category: "Interior",
-    before: "/images/work/17.jpg",
-    after: "/images/work/19.jpg",
   },
   {
     slug: "cupra-formentor-rear-interior",
@@ -74,6 +59,15 @@ export const workItems: WorkItem[] = [
     category: "Interior",
     before: "/images/work/26.jpg",
     after: "/images/work/27.jpg",
+    featured: true,
+  },
+  {
+    slug: "scania-tipper-cab",
+    title: "Cab interior deep clean",
+    vehicle: "Scania 420P Tipper",
+    category: "Interior",
+    before: "/images/work/13.jpg",
+    after: "/images/work/11.jpg",
     featured: true,
   },
 ];
