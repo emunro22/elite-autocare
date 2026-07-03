@@ -84,19 +84,19 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-          className="relative hidden aspect-[4/5] w-full lg:block lg:max-h-[46vh] xl:max-h-[52vh]"
+          className="relative hidden aspect-[4/5] lg:ml-auto lg:block lg:h-[62vh] xl:h-[68vh]"
         >
           <div className="absolute -inset-6 rounded-sm bg-gold-500/10 blur-3xl" />
           <HeroSlideshow />
 
           {!badgeError && (
-            <div className="absolute -bottom-10 -left-10 h-28 w-28 rounded-full ring-4 ring-navy-900 drop-shadow-2xl sm:h-36 sm:w-36">
+            <div className="absolute -bottom-10 -left-10 h-28 w-28 drop-shadow-2xl sm:h-36 sm:w-36">
               <Image
                 src="/images/logo-badge.png"
                 alt="Elite Autocare"
                 fill
                 sizes="144px"
-                className="rounded-full object-contain"
+                className="object-contain"
                 onError={() => setBadgeError(true)}
               />
             </div>
