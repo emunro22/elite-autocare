@@ -9,7 +9,12 @@ import { workItems, showcaseItems } from "@/lib/work";
 export const metadata: Metadata = {
   title: "Gallery",
   description:
-    "Before and after photos from Elite Autocare valets across Glasgow. Drag each slider to see the transformation.",
+    "Before and after photos from Elite Autocare mobile valets across Glasgow and Central Scotland. Drag each slider to see the transformation.",
+  keywords: [
+    "car valeting before and after",
+    "mobile detailing photos Glasgow",
+    "car valet results",
+  ],
 };
 
 export default function GalleryPage() {

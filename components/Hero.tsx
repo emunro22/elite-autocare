@@ -29,7 +29,7 @@ export default function Hero() {
         <HeroSlideshow variant="background" showDots={false} />
       </div>
       <BubbleField count={16} />
-      <div className="container-elite relative z-10 grid min-h-[90vh] items-center gap-12 py-28 lg:grid-cols-[1.15fr_0.85fr]">
+      <div className="container-elite relative z-10 grid min-h-[80vh] items-center gap-12 py-20 lg:grid-cols-[1.15fr_0.85fr]">
         <motion.div variants={container} initial="hidden" animate="show" className="max-w-none">
           <motion.span variants={item} className="eyebrow inline-flex items-center gap-2 text-sm">
             <Sparkles size={15} className="text-gold-400" />
@@ -38,7 +38,7 @@ export default function Hero() {
 
           <motion.h1
             variants={item}
-            className="mt-7 font-display text-6xl font-bold leading-[1.02] text-mist-100 sm:text-7xl md:text-8xl"
+            className="mt-4 font-display text-5xl font-bold leading-[1.02] text-mist-100 sm:text-6xl md:text-7xl"
           >
             A showroom finish,
             <br />

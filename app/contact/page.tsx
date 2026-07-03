@@ -5,7 +5,12 @@ import ContactForm from "@/components/ContactForm";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Elite Autocare for questions, quotes on machine polish and ceramic coating, or to check we cover your area.",
+    "Get in touch with Elite Autocare for questions, quotes on machine polish and ceramic coating, or to check we cover your area of Glasgow or Central Scotland.",
+  keywords: [
+    "contact mobile valeting Glasgow",
+    "car valet quote Glasgow",
+    "Elite Autocare contact",
+  ],
 };
 
 export default function ContactPage() {

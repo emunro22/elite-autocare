@@ -28,9 +28,19 @@ export const metadata: Metadata = {
   description:
     "Professional mobile valeting and detailing across Glasgow. Silver, Gold and Platinum packages, machine polish and ceramic coating. Book online today.",
   keywords: [
+    "mobile valeting Glasgow",
     "car valeting Glasgow",
-    "mobile detailing Glasgow",
+    "mobile car detailing Glasgow",
+    "mobile car valet near me",
+    "driveway valeting Glasgow",
+    "snow foam wash Glasgow",
     "ceramic coating Glasgow",
+    "machine polish Glasgow",
+    "paint protection Glasgow",
+    "interior valet Glasgow",
+    "car valeting Renfrewshire",
+    "car valeting Lanarkshire",
+    "mobile valeting near me",
     "Elite Autocare",
   ],
   openGraph: {

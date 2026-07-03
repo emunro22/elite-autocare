@@ -19,6 +19,12 @@ export function generateMetadata({
   return {
     title: `Mobile Valeting in ${area.name}`,
     description: `Elite Autocare offers mobile car valeting and detailing in ${area.name}. ${area.blurb}`,
+    keywords: [
+      `mobile valeting ${area.name}`,
+      `car valeting ${area.name}`,
+      `mobile car detailing ${area.name}`,
+      `driveway valet ${area.name}`,
+    ],
   };
 }
 
@@ -29,6 +35,10 @@ export default function AreaDetailPage({
 }) {
   const area = areas.find((a) => a.slug === params.slug);
   if (!area) notFound();
+
+  const nearbyAreas = areas
+    .filter((a) => a.region === area.region && a.slug !== area.slug)
+    .slice(0, 6);
 
   return (
     <div className="container-elite py-20">
@@ -71,7 +81,26 @@ export default function AreaDetailPage({
         ))}
       </div>
 
-      <div className="mt-16">
+      {nearbyAreas.length > 0 && (
+        <div className="mt-16">
+          <h2 className="font-display text-sm font-semibold uppercase tracking-widest2 text-gold-400">
+            Also covering nearby in {area.region}
+          </h2>
+          <div className="mt-4 flex flex-wrap gap-3">
+            {nearbyAreas.map((a) => (
+              <Link
+                key={a.slug}
+                href={`/areas/${a.slug}`}
+                className="rounded-sm border border-mist-500/15 bg-navy-800/40 px-4 py-2 text-sm text-mist-300 hover:border-gold-500/50 hover:text-gold-300"
+              >
+                {a.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="mt-10">
         <Link href="/areas" className="inline-flex items-center gap-2 text-sm text-mist-400 hover:text-gold-400">
           &larr; Back to all areas
         </Link>

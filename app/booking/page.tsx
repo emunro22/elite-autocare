@@ -6,7 +6,12 @@ import BookingForm from "@/components/BookingForm";
 export const metadata: Metadata = {
   title: "Book a Valet",
   description:
-    "Book your Elite Autocare mobile valet online. Choose your package, pick a time, and we'll confirm your slot.",
+    "Book your Elite Autocare mobile valet online. Choose your package, pick a time, and we'll confirm your slot anywhere across Glasgow and Central Scotland.",
+  keywords: [
+    "book mobile valet Glasgow",
+    "book car valeting online",
+    "mobile detailing booking",
+  ],
 };
 
 export default function BookingPage() {

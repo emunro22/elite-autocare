@@ -6,7 +6,12 @@ import SectionHeading from "@/components/SectionHeading";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Elite Autocare is a mobile valeting and detailing team based in Glasgow, focused on careful, consistent work on every car.",
+    "Elite Autocare is a mobile valeting and detailing team based in Erskine, covering Glasgow and Central Scotland with careful, consistent work on every car.",
+  keywords: [
+    "mobile valeting company Glasgow",
+    "car detailing team Glasgow",
+    "about Elite Autocare",
+  ],
 };
 
 const values = [

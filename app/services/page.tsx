@@ -8,7 +8,15 @@ import { packages, packageNote, addOns } from "@/lib/services";
 export const metadata: Metadata = {
   title: "Services & Packages",
   description:
-    "Silver, Gold and Platinum valeting packages, plus machine polish and ceramic coating add-ons from Elite Autocare.",
+    "Silver, Gold and Platinum mobile valeting packages, plus machine polish and ceramic coating add-ons from Elite Autocare, Glasgow's mobile car detailing specialists.",
+  keywords: [
+    "valeting packages Glasgow",
+    "car detailing packages",
+    "machine polish Glasgow",
+    "ceramic coating Glasgow",
+    "snow foam wash",
+    "mobile valet prices",
+  ],
 };
 
 export default function ServicesPage() {

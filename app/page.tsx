@@ -8,6 +8,21 @@ import BrandIllustration from "@/components/BrandIllustration";
 import { packages, packageNote } from "@/lib/services";
 import { areas } from "@/lib/areas";
 
+const featuredSlugs = [
+  "glasgow-city-centre",
+  "west-end",
+  "southside",
+  "paisley",
+  "clydebank",
+  "bearsden",
+  "newton-mearns",
+  "hamilton",
+  "east-kilbride",
+];
+const featuredAreas = featuredSlugs
+  .map((slug) => areas.find((area) => area.slug === slug))
+  .filter((area): area is (typeof areas)[number] => Boolean(area));
+
 const process = [
   {
     icon: Timer,
@@ -89,11 +104,11 @@ export default function HomePage() {
       <section className="container-elite py-24">
         <SectionHeading
           eyebrow="Where we work"
-          title="Covering Glasgow and the surrounding area"
-          description="Based in Erskine and working right across Greater Glasgow. Don't see your area listed? Get in touch, we're always expanding our rounds."
+          title={`Covering ${areas.length} towns across Glasgow & Central Scotland`}
+          description="Based in Erskine and working right across Greater Glasgow, Renfrewshire, Dunbartonshire and Lanarkshire. Don't see your area listed? Get in touch, we're always expanding our rounds."
         />
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {areas.map((area) => (
+          {featuredAreas.map((area) => (
             <Link
               key={area.slug}
               href={`/areas/${area.slug}`}
@@ -105,6 +120,14 @@ export default function HomePage() {
               <ArrowRight size={16} className="text-mist-500 group-hover:text-gold-400" />
             </Link>
           ))}
+        </div>
+        <div className="mt-8">
+          <Link
+            href="/areas"
+            className="inline-flex items-center gap-2 text-sm font-medium text-gold-400 hover:text-gold-300"
+          >
+            See all {areas.length} areas we cover <ArrowRight size={15} />
+          </Link>
         </div>
       </section>
 

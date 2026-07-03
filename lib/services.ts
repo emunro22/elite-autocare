@@ -35,7 +35,6 @@ export const packages: Package[] = [
     featured: true,
     exterior: [
       "Snow foam pre-wash",
-      "Iron fall out / clay wash",
       "Full exterior wash",
       "Door shuts cleaned",
       "Deep cleanse on wheels",
@@ -56,7 +55,7 @@ export const packages: Package[] = [
     tagline: "The complete showroom finish, inside and out.",
     exterior: [
       "Snow foam pre-wash",
-      "Iron fallout / clay wash",
+      "Iron fallout treatment",
       "Full exterior wash",
       "Door shuts cleaned",
       "Deep cleanse on wheels",
