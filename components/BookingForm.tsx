@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, Loader2, AlertCircle } from "lucide-react";
+import { CheckCircle2, Loader2, AlertCircle, Clock } from "lucide-react";
 import { packages } from "@/lib/services";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -13,6 +13,11 @@ const inputClass =
 
 const labelClass = "mb-2 block text-xs uppercase tracking-widest2 text-mist-500";
 
+const packageOptions = [
+  ...packages.map((pkg) => ({ slug: pkg.slug, label: `${pkg.name} — £${pkg.price}` })),
+  { slug: "advice", label: "Not sure / advice needed" },
+];
+
 export default function BookingForm() {
   const searchParams = useSearchParams();
   const presetPackage = searchParams.get("package") || "";
@@ -21,8 +26,52 @@ export default function BookingForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
+  const [packageSlug, setPackageSlug] = useState(presetPackage);
+  const [date, setDate] = useState("");
+  const [startTime, setStartTime] = useState("");
+
+  const [slots, setSlots] = useState<string[]>([]);
+  const [slotsLoading, setSlotsLoading] = useState(false);
+  const [slotsError, setSlotsError] = useState("");
+
+  useEffect(() => {
+    setStartTime("");
+    if (!packageSlug || !date) {
+      setSlots([]);
+      return;
+    }
+
+    let cancelled = false;
+    setSlotsLoading(true);
+    setSlotsError("");
+
+    fetch(`/api/availability?date=${date}&package=${packageSlug}`)
+      .then((res) => res.json())
+      .then((json) => {
+        if (cancelled) return;
+        setSlots(json.slots || []);
+      })
+      .catch(() => {
+        if (!cancelled) setSlotsError("Couldn't load availability. Please try again.");
+      })
+      .finally(() => {
+        if (!cancelled) setSlotsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [packageSlug, date]);
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (!startTime) {
+      setStatus("error");
+      setErrorMsg("Please choose an available time slot.");
+      return;
+    }
+
     setStatus("submitting");
     setErrorMsg("");
 
@@ -34,9 +83,9 @@ export default function BookingForm() {
       phone: String(data.get("phone") || ""),
       address: String(data.get("address") || ""),
       vehicle: String(data.get("vehicle") || ""),
-      package: String(data.get("package") || ""),
-      preferredDate: String(data.get("preferredDate") || ""),
-      preferredTime: String(data.get("preferredTime") || ""),
+      packageSlug,
+      date,
+      startTime,
       notes: String(data.get("notes") || ""),
     };
 
@@ -47,9 +96,18 @@ export default function BookingForm() {
         body: JSON.stringify(payload),
       });
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error || "Something went wrong.");
+      if (!res.ok) {
+        if (res.status === 409) {
+          setSlots((prev) => prev.filter((s) => s !== startTime));
+          setStartTime("");
+        }
+        throw new Error(json.error || "Something went wrong.");
+      }
       setStatus("success");
       form.reset();
+      setPackageSlug("");
+      setDate("");
+      setStartTime("");
     } catch (err) {
       setStatus("error");
       setErrorMsg(err instanceof Error ? err.message : "Something went wrong.");
@@ -65,11 +123,10 @@ export default function BookingForm() {
       >
         <CheckCircle2 size={40} className="text-gold-400" />
         <h3 className="font-display text-2xl font-bold text-mist-100">
-          Booking request sent
+          Booking confirmed
         </h3>
         <p className="max-w-sm text-sm text-mist-300">
-          We&apos;ve emailed you a confirmation and will be in touch shortly
-          to lock in your slot.
+          We&apos;ve emailed you a confirmation. See you at your booked time.
         </p>
         <button
           onClick={() => setStatus("idle")}
@@ -115,34 +172,71 @@ export default function BookingForm() {
             required
             id="package"
             name="package"
-            defaultValue={presetPackage}
+            value={packageSlug}
+            onChange={(e) => setPackageSlug(e.target.value)}
             className={inputClass}
           >
             <option value="" disabled>Choose a package</option>
-            {packages.map((pkg) => (
-              <option key={pkg.slug} value={pkg.name}>
-                {pkg.name} — £{pkg.price}
+            {packageOptions.map((opt) => (
+              <option key={opt.slug} value={opt.slug}>
+                {opt.label}
               </option>
             ))}
-            <option value="Not sure / advice needed">Not sure / advice needed</option>
           </select>
         </div>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2">
-        <div>
-          <label className={labelClass} htmlFor="preferredDate">Preferred date</label>
-          <input required id="preferredDate" name="preferredDate" type="date" className={inputClass} />
-        </div>
-        <div>
-          <label className={labelClass} htmlFor="preferredTime">Preferred time</label>
-          <select required id="preferredTime" name="preferredTime" className={inputClass} defaultValue="">
-            <option value="" disabled>Choose a time</option>
-            <option>Morning (9am - 12pm)</option>
-            <option>Afternoon (12pm - 4pm)</option>
-            <option>Evening (4pm - 7pm)</option>
-          </select>
-        </div>
+      <div>
+        <label className={labelClass} htmlFor="date">Date</label>
+        <input
+          required
+          id="date"
+          name="date"
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          className={inputClass}
+        />
+        <p className="mt-2 text-xs text-mist-500">Monday–Friday, 9am–5:30pm.</p>
+      </div>
+
+      <div>
+        <label className={labelClass}>
+          <span className="inline-flex items-center gap-1.5">
+            <Clock size={12} /> Available times
+          </span>
+        </label>
+
+        {!packageSlug || !date ? (
+          <p className="text-sm text-mist-500">Choose a package and date to see available times.</p>
+        ) : slotsLoading ? (
+          <p className="flex items-center gap-2 text-sm text-mist-500">
+            <Loader2 size={14} className="animate-spin" /> Checking availability...
+          </p>
+        ) : slotsError ? (
+          <p className="text-sm text-red-300">{slotsError}</p>
+        ) : slots.length === 0 ? (
+          <p className="text-sm text-mist-500">
+            No slots left for that date — try another day or call us on 07946 089 183.
+          </p>
+        ) : (
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
+            {slots.map((slot) => (
+              <button
+                key={slot}
+                type="button"
+                onClick={() => setStartTime(slot)}
+                className={`rounded-sm border px-3 py-2 text-sm transition-colors ${
+                  startTime === slot
+                    ? "border-gold-500 bg-gold-500 text-navy-950 font-semibold"
+                    : "border-mist-500/25 bg-navy-900/60 text-mist-200 hover:border-gold-500/60"
+                }`}
+              >
+                {slot}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {presetArea && (
@@ -185,13 +279,13 @@ export default function BookingForm() {
               <Loader2 size={16} className="animate-spin" /> Sending...
             </>
           ) : (
-            "Request Booking"
+            "Confirm Booking"
           )}
         </span>
         <span className="absolute inset-0 -translate-x-full bg-gold-sheen transition-transform duration-700 ease-out group-hover:translate-x-full" />
       </button>
       <p className="text-xs text-mist-500">
-        This sends a request &mdash; we&apos;ll confirm your exact slot by phone or email.
+        This locks in your slot straight away — we&apos;ll email you a confirmation.
       </p>
     </form>
   );

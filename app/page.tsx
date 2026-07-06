@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import SectionHeading from "@/components/SectionHeading";
 import PackageCard from "@/components/PackageCard";
 import MyWork from "@/components/MyWork";
+import Testimonials from "@/components/Testimonials";
 import BrandIllustration from "@/components/BrandIllustration";
 import { packages, packageNote } from "@/lib/services";
 import { areas } from "@/lib/areas";
@@ -99,6 +100,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <Testimonials />
 
       {/* Areas preview */}
       <section className="container-elite py-24">

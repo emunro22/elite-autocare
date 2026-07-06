@@ -61,25 +61,25 @@ export default function Navbar() {
           : "border-gold-500/10 bg-navy-900/70 backdrop-blur-md"
       )}
     >
-      <div className="container-elite flex h-28 items-center justify-between">
+      <div className="container-elite flex h-20 items-center justify-between">
         <Link href="/" className="group flex items-center gap-3" onClick={() => setOpen(false)}>
           {!logoError && (
-            <span className="relative h-20 w-20 shrink-0 sm:h-24 sm:w-24 lg:h-28 lg:w-28">
+            <span className="relative h-12 w-12 shrink-0 sm:h-14 sm:w-14">
               <Image
                 src="/images/logo-badge.png"
                 alt="Elite Autocare"
                 fill
-                sizes="112px"
+                sizes="56px"
                 className="object-contain"
                 onError={() => setLogoError(true)}
               />
             </span>
           )}
           <span className="flex items-baseline gap-2">
-            <span className="font-display text-3xl font-bold tracking-tight bg-gradient-to-b from-gold-300 via-gold-500 to-gold-600 bg-clip-text text-transparent">
+            <span className="font-display text-2xl font-bold tracking-tight bg-gradient-to-b from-gold-300 via-gold-500 to-gold-600 bg-clip-text text-transparent">
               Elite
             </span>
-            <span className="font-display text-3xl font-medium text-mist-100">
+            <span className="font-display text-2xl font-medium text-mist-100">
               Autocare
             </span>
           </span>
@@ -140,7 +140,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 bottom-0 top-28 z-40 overflow-y-auto border-t border-gold-500/10 bg-navy-900 md:hidden"
+            className="fixed inset-x-0 bottom-0 top-20 z-40 overflow-y-auto border-t border-gold-500/10 bg-navy-900 md:hidden"
           >
             <div className="container-elite flex flex-col gap-1 py-8">
               {links.map((link, i) => (
