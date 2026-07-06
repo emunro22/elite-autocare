@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getResendClient, BUSINESS_EMAIL, FROM_EMAIL } from "@/lib/resend";
+import { getResendClient, assertSent, BUSINESS_EMAIL, FROM_EMAIL } from "@/lib/resend";
 import { ensureSchema, sql } from "@/lib/db";
 import {
   durationForPackage,
@@ -112,12 +112,13 @@ export async function POST(req: NextRequest) {
   try {
     const resend = getResendClient();
 
-    await resend.emails.send({
-      from: FROM_EMAIL,
-      to: BUSINESS_EMAIL,
-      reply_to: email,
-      subject: `New booking: ${packageName} — ${name}`,
-      html: `
+    assertSent(
+      await resend.emails.send({
+        from: FROM_EMAIL,
+        to: BUSINESS_EMAIL,
+        reply_to: email,
+        subject: `New booking: ${packageName} — ${name}`,
+        html: `
         <h2>New booking</h2>
         <p><strong>Package:</strong> ${packageName}</p>
         <p><strong>Name:</strong> ${name}</p>
@@ -129,19 +130,22 @@ export async function POST(req: NextRequest) {
         <p><strong>Time:</strong> ${startTime} – ${endTime}</p>
         <p><strong>Notes:</strong> ${notes || "—"}</p>
       `,
-    });
+      })
+    );
 
-    await resend.emails.send({
-      from: FROM_EMAIL,
-      to: email,
-      subject: "We've received your Elite Autocare booking",
-      html: `
+    assertSent(
+      await resend.emails.send({
+        from: FROM_EMAIL,
+        to: email,
+        subject: "We've received your Elite Autocare booking",
+        html: `
         <h2>Thanks, ${name}!</h2>
         <p>Your <strong>${packageName}</strong> booking for <strong>${date}</strong> at <strong>${startTime}</strong> (ending around ${endTime}) is confirmed.</p>
         <p>We'll see you then — call us on 07946 089 183 if anything changes.</p>
         <p>&mdash; Elite Autocare</p>
       `,
-    });
+      })
+    );
   } catch (err) {
     console.error("Booking confirmation email failed:", err);
     // The booking itself is already saved; don't fail the request over email delivery.

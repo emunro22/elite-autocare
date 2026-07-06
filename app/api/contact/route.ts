@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getResendClient, BUSINESS_EMAIL, FROM_EMAIL } from "@/lib/resend";
+import { getResendClient, assertSent, BUSINESS_EMAIL, FROM_EMAIL } from "@/lib/resend";
 
 type ContactPayload = {
   name: string;
@@ -39,19 +39,21 @@ export async function POST(req: NextRequest) {
 
   try {
     const resend = getResendClient();
-    await resend.emails.send({
-      from: FROM_EMAIL,
-      to: BUSINESS_EMAIL,
-      reply_to: email,
-      subject: `New enquiry from ${name}`,
-      html: `
+    assertSent(
+      await resend.emails.send({
+        from: FROM_EMAIL,
+        to: BUSINESS_EMAIL,
+        reply_to: email,
+        subject: `New enquiry from ${name}`,
+        html: `
         <h2>New website enquiry</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Message:</strong></p>
         <p>${message.replace(/\n/g, "<br />")}</p>
       `,
-    });
+      })
+    );
 
     return NextResponse.json({ success: true });
   } catch (err) {

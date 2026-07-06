@@ -1,5 +1,14 @@
 import { Resend } from "resend";
 
+// The Resend SDK does not throw on API errors (invalid key, unverified
+// domain, rate limit, etc.) — it resolves with { data: null, error }. Callers
+// must check this, or a failed send silently looks like a success.
+export function assertSent<T extends { error: { message: string } | null }>(result: T): void {
+  if (result.error) {
+    throw new Error(result.error.message);
+  }
+}
+
 // Reads RESEND_API_KEY from environment at call time so the module can be
 // safely imported even before env vars are configured in local dev.
 export function getResendClient() {
