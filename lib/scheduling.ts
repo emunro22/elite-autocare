@@ -1,5 +1,5 @@
 export const PACKAGE_DURATION_MIN: Record<string, number> = {
-  silver: 150,
+  silver: 90,
   gold: 150,
   platinum: 210,
   advice: 150,
@@ -13,8 +13,10 @@ export const PACKAGE_DISPLAY_NAME: Record<string, string> = {
 };
 
 export const BUSINESS_OPEN = "09:00";
-export const BUSINESS_CLOSE = "17:30";
-export const SLOT_STEP_MIN = 30;
+export const BUSINESS_CLOSE = "19:00";
+
+// Three fixed appointment windows per day: 9-1, 1-4, 4-7.
+export const APPOINTMENT_SLOTS = ["09:00", "13:00", "16:00"];
 
 const TIMEZONE = "Europe/London";
 
@@ -35,15 +37,11 @@ export function durationForPackage(packageSlug: string): number | null {
   return PACKAGE_DURATION_MIN[packageSlug] ?? null;
 }
 
-// Every SLOT_STEP_MIN start time such that the job finishes by BUSINESS_CLOSE.
+// The fixed daily appointment windows (9-1, 1-4, 4-7) that finish by BUSINESS_CLOSE
+// once the job's actual duration is added.
 export function generateCandidateSlots(durationMin: number): string[] {
-  const open = toMinutes(BUSINESS_OPEN);
   const close = toMinutes(BUSINESS_CLOSE);
-  const slots: string[] = [];
-  for (let start = open; start + durationMin <= close; start += SLOT_STEP_MIN) {
-    slots.push(toHHMM(start));
-  }
-  return slots;
+  return APPOINTMENT_SLOTS.filter((start) => toMinutes(start) + durationMin <= close);
 }
 
 export function addMinutes(hhmm: string, minutes: number): string {

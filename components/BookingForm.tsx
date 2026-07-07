@@ -197,7 +197,7 @@ export default function BookingForm() {
           onChange={(e) => setDate(e.target.value)}
           className={inputClass}
         />
-        <p className="mt-2 text-xs text-mist-500">Monday–Friday, 9am–5:30pm.</p>
+        <p className="mt-2 text-xs text-mist-500">Monday–Friday, 9am–7pm.</p>
       </div>
 
       <div>

@@ -26,9 +26,10 @@ Open http://localhost:3000
   ContactForm, Testimonials, BubbleField (ambient background), SectionHeading.
 - `lib/services.ts` — the Silver / Gold / Platinum package data, taken
   from the poster. Edit prices or feature lists here.
-- `lib/scheduling.ts` — business hours (Mon–Fri, 9am–5:30pm), package
-  durations (Silver/Gold 2.5h, Platinum 3.5h) and slot-generation logic
-  behind the booking calendar. Edit this if hours or durations change.
+- `lib/scheduling.ts` — business hours (Mon–Fri, 9am–7pm), package
+  durations (Silver 1.5h, Gold 2.5h, Platinum 3.5h) and the three fixed
+  appointment windows (9-1, 1-4, 4-7) behind the booking calendar. Edit
+  this if hours, durations, or the slot windows change.
 - `lib/db.ts` — the Postgres client and `ensureSchema()`, which creates
   the `bookings` table on first use so there's no manual migration step.
 - `lib/areas.ts` — the list of areas covered. The poster didn't specify
