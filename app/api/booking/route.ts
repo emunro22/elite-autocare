@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getResendClient, assertSent, BUSINESS_EMAIL, FROM_EMAIL } from "@/lib/resend";
+import { getResendClient, assertSent, BUSINESS_EMAIL, FROM_EMAIL, wrapEmailHtml } from "@/lib/resend";
 import { ensureSchema, sql } from "@/lib/db";
 import {
   durationForPackage,
@@ -118,18 +118,29 @@ export async function POST(req: NextRequest) {
         to: BUSINESS_EMAIL,
         reply_to: email,
         subject: `New booking: ${packageName} — ${name}`,
-        html: `
-        <h2>New booking</h2>
-        <p><strong>Package:</strong> ${packageName}</p>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Address / postcode:</strong> ${address}</p>
-        <p><strong>Vehicle:</strong> ${vehicle}</p>
-        <p><strong>Date:</strong> ${date}</p>
-        <p><strong>Time:</strong> ${startTime} – ${endTime}</p>
-        <p><strong>Notes:</strong> ${notes || "—"}</p>
-      `,
+        html: wrapEmailHtml(`
+        <h2 style="margin: 0 0 16px; font-size: 18px;">New booking</h2>
+        <p style="margin: 0 0 8px;"><strong>Package:</strong> ${packageName}</p>
+        <p style="margin: 0 0 8px;"><strong>Name:</strong> ${name}</p>
+        <p style="margin: 0 0 8px;"><strong>Email:</strong> ${email}</p>
+        <p style="margin: 0 0 8px;"><strong>Phone:</strong> ${phone}</p>
+        <p style="margin: 0 0 8px;"><strong>Address / postcode:</strong> ${address}</p>
+        <p style="margin: 0 0 8px;"><strong>Vehicle:</strong> ${vehicle}</p>
+        <p style="margin: 0 0 8px;"><strong>Date:</strong> ${date}</p>
+        <p style="margin: 0 0 8px;"><strong>Time:</strong> ${startTime} – ${endTime}</p>
+        <p style="margin: 0;"><strong>Notes:</strong> ${notes || "—"}</p>
+      `),
+        text: `New booking
+
+Package: ${packageName}
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Address / postcode: ${address}
+Vehicle: ${vehicle}
+Date: ${date}
+Time: ${startTime} – ${endTime}
+Notes: ${notes || "—"}`,
       })
     );
 
@@ -138,12 +149,29 @@ export async function POST(req: NextRequest) {
         from: FROM_EMAIL,
         to: email,
         subject: "We've received your Elite Autocare booking",
-        html: `
-        <h2>Thanks, ${name}!</h2>
-        <p>Your <strong>${packageName}</strong> booking for <strong>${date}</strong> at <strong>${startTime}</strong> (ending around ${endTime}) is confirmed.</p>
-        <p>We'll see you then — call us on 07946 089 183 if anything changes.</p>
-        <p>&mdash; Elite Autocare</p>
-      `,
+        html: wrapEmailHtml(`
+        <h2 style="margin: 0 0 16px; font-size: 18px;">Thanks, ${name}!</h2>
+        <p style="margin: 0 0 12px;">Your booking is confirmed:</p>
+        <p style="margin: 0 0 8px;"><strong>Package:</strong> ${packageName}</p>
+        <p style="margin: 0 0 8px;"><strong>Date:</strong> ${date}</p>
+        <p style="margin: 0 0 8px;"><strong>Time:</strong> ${startTime} – ${endTime}</p>
+        <p style="margin: 0 0 8px;"><strong>Address / postcode:</strong> ${address}</p>
+        <p style="margin: 0 0 16px;"><strong>Vehicle:</strong> ${vehicle}</p>
+        <p style="margin: 0;">We'll see you then — call us on 07946 089 183 if anything changes.</p>
+      `),
+        text: `Thanks, ${name}!
+
+Your booking is confirmed:
+
+Package: ${packageName}
+Date: ${date}
+Time: ${startTime} – ${endTime}
+Address / postcode: ${address}
+Vehicle: ${vehicle}
+
+We'll see you then — call us on 07946 089 183 if anything changes.
+
+— Elite Autocare`,
       })
     );
   } catch (err) {
