@@ -118,18 +118,31 @@ export async function POST(req: NextRequest) {
         to: BUSINESS_EMAIL,
         reply_to: email,
         subject: `New booking: ${packageName} — ${name}`,
-        html: `
-        <h2>New booking</h2>
-        <p><strong>Package:</strong> ${packageName}</p>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Address / postcode:</strong> ${address}</p>
-        <p><strong>Vehicle:</strong> ${vehicle}</p>
-        <p><strong>Date:</strong> ${date}</p>
-        <p><strong>Time:</strong> ${startTime} – ${endTime}</p>
-        <p><strong>Notes:</strong> ${notes || "—"}</p>
-      `,
+        html: wrapEmailHtml(
+          "New booking",
+          emailFieldsBox([
+            ["Package", packageName],
+            ["Name", name],
+            ["Email", email],
+            ["Phone", phone],
+            ["Address / postcode", address],
+            ["Vehicle", vehicle],
+            ["Date", date],
+            ["Time", `${startTime} – ${endTime}`],
+            ["Notes", notes || "—"],
+          ])
+        ),
+        text: `New booking
+
+Package: ${packageName}
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Address / postcode: ${address}
+Vehicle: ${vehicle}
+Date: ${date}
+Time: ${startTime} – ${endTime}
+Notes: ${notes || "—"}`,
       })
     );
 
@@ -138,16 +151,18 @@ export async function POST(req: NextRequest) {
         from: FROM_EMAIL,
         to: email,
         subject: "We've received your Elite Autocare booking",
-        html: wrapEmailHtml(`
-        <h2 style="margin: 0 0 12px; font-size: 22px; color: #e3c584; text-align: center;">Thanks, ${name}!</h2>
-        <p style="margin: 0; font-size: 15px; color: #c7d1e0; line-height: 1.6;">Your <strong style="color: #f5f7fa;">${packageName}</strong> booking is confirmed. We'll see you then — call us on 07946&nbsp;089&nbsp;183 if anything changes.</p>
+        html: wrapEmailHtml(
+          `Thanks, ${name}!`,
+          `
+        <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#f5f7fa;line-height:1.6;">Your booking is confirmed. We'll see you then — call us on 07946&nbsp;089&nbsp;183 if anything changes.</p>
         ${emailFieldsBox([
           ["Package", packageName],
           ["Date", date],
           ["Time", `${startTime} – ${endTime}`],
           ["Address", address],
         ])}
-      `),
+      `
+        ),
         text: `Thanks, ${name}!
 
 Your ${packageName} booking is confirmed.

@@ -32,44 +32,95 @@ export const FROM_EMAIL =
 
 const SITE_URL = "https://eliteautocare.co.uk";
 
-// Shared shell used by every customer-facing email (booking confirmation,
-// review request) so they read as one consistent branded system. Mirrors
-// the site's navy/gold palette from tailwind.config.ts.
-export function wrapEmailHtml(bodyHtml: string): string {
-  return `
-    <div style="background-color: #050b16; padding: 32px 16px;">
-      <div style="max-width: 480px; margin: 0 auto; background-color: #0a1628; border: 1px solid rgba(205,161,90,0.25); border-radius: 16px; padding: 32px 28px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
-        <div style="text-align: center; margin-bottom: 20px;">
-          <img src="${SITE_URL}/images/logo-email.png" width="120" height="120" alt="Elite Autocare" style="display: inline-block; width: 120px; height: 120px;" />
-        </div>
-        <div style="height: 1px; background: linear-gradient(to right, transparent, rgba(205,161,90,0.4), transparent); margin-bottom: 24px;"></div>
-        ${bodyHtml}
-        <div style="margin-top: 28px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: #8ea0bc; text-align: center;">
-          Elite Autocare &middot; Mobile Valeting &amp; Detailing, Glasgow<br />
-          07946 089 183 &middot; eliteautocare.co.uk
-        </div>
-      </div>
-    </div>
-  `;
+// Table-based layout (not divs) so it renders correctly in Outlook desktop
+// and other clients with poor CSS support, not just Gmail/Apple Mail.
+function emailFieldRows(fields: [label: string, value: string][]): string {
+  return fields
+    .map(
+      ([label, value], i) => `
+        <tr>
+          <td style="padding:${i === 0 ? "0" : "10px"} 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#cda15a;width:40%;vertical-align:top;">
+            ${label}
+          </td>
+          <td style="padding:${i === 0 ? "0" : "10px"} 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#f5f7fa;vertical-align:top;">
+            ${value}
+          </td>
+        </tr>`
+    )
+    .join("");
 }
 
-// Renders a label/value row used inside the booking details card.
-function emailFieldRow(label: string, value: string): string {
-  return `
-    <tr>
-      <td style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
-        <span style="display: block; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #cda15a; font-weight: 600;">${label}</span>
-        <span style="display: block; font-size: 15px; color: #f5f7fa; font-weight: 600; margin-top: 3px;">${value}</span>
-      </td>
-    </tr>
-  `;
-}
-
-// A rounded card of label/value rows (package, date, time, address, etc.)
+// A bordered card of label/value rows (package, date, time, address, etc.)
 export function emailFieldsBox(fields: [label: string, value: string][]): string {
   return `
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #0f2038; border-radius: 12px; padding: 4px 16px; margin: 20px 0;">
-      ${fields.map(([label, value]) => emailFieldRow(label, value)).join("")}
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;border:1px solid rgba(205,161,90,0.25);border-radius:6px;background:#0f2038;">
+      <tr>
+        <td style="padding:20px 24px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+            ${emailFieldRows(fields)}
+          </table>
+        </td>
+      </tr>
     </table>
   `;
+}
+
+// A gold CTA button matching the brand palette.
+export function emailButton(href: string, label: string): string {
+  return `
+    <table role="presentation" cellpadding="0" cellspacing="0" style="margin:24px auto 0 auto;">
+      <tr>
+        <td style="border-radius:6px;background:#cda15a;">
+          <a href="${href}" style="display:inline-block;padding:12px 28px;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;color:#050b16;text-decoration:none;">${label}</a>
+        </td>
+      </tr>
+    </table>
+  `;
+}
+
+// Shared shell used by every automatic email (booking notification,
+// confirmation, review request) so they read as one consistent branded
+// system. Mirrors the site's navy/gold palette from tailwind.config.ts.
+export function wrapEmailHtml(heading: string, innerHtml: string): string {
+  return `<!doctype html>
+<html>
+  <body style="margin:0;padding:0;background:#050b16;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#050b16;padding:32px 16px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#0a1628;border-radius:10px;border:1px solid rgba(205,161,90,0.18);overflow:hidden;">
+            <tr>
+              <td style="padding:28px 40px 0 40px;text-align:center;">
+                <img
+                  src="${SITE_URL}/images/logo-email.png"
+                  width="140"
+                  alt="Elite Autocare"
+                  style="display:block;margin:0 auto;width:140px;max-width:140px;height:auto;"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:8px 40px 0 40px;">
+                <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(205,161,90,0.5),transparent);margin:16px 0;"></div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:0 40px 32px 40px;">
+                <h1 style="margin:0 0 16px 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:bold;color:#e3c584;text-align:center;">
+                  ${heading}
+                </h1>
+                ${innerHtml}
+                <div style="height:1px;background:rgba(205,161,90,0.15);margin:28px 0 20px 0;"></div>
+                <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#8ea0bc;">
+                  Elite Autocare &mdash; mobile valeting &amp; detailing<br />
+                  07946 089 183 &nbsp;&bull;&nbsp; eliteautocare.co.uk
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
 }
