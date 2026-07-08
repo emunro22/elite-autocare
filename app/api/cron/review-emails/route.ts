@@ -30,10 +30,11 @@ export async function GET(req: NextRequest) {
           to: booking.email,
           subject: "How did we do? Leave us a review",
           html: wrapEmailHtml(`
-          <h2 style="margin: 0 0 16px; font-size: 18px;">Thanks for choosing Elite Autocare, ${booking.name}!</h2>
-          <p style="margin: 0 0 12px;">We hope you're happy with how your vehicle turned out today.</p>
-          <p style="margin: 0 0 12px;">If you have a minute, we'd really appreciate a quick Google review — it helps us a lot:</p>
-          <p style="margin: 0;"><a href="${GOOGLE_REVIEW_URL}" style="color: #a97f3d;">${GOOGLE_REVIEW_URL}</a></p>
+          <h2 style="margin: 0 0 12px; font-size: 22px; color: #e3c584; text-align: center;">Thanks for choosing us, ${booking.name}!</h2>
+          <p style="margin: 0 0 12px; font-size: 15px; color: #c7d1e0; line-height: 1.6;">We hope you're happy with how your vehicle turned out today. If you have a minute, we'd really appreciate a quick Google review — it helps us a lot.</p>
+          <div style="text-align: center; margin: 24px 0 4px;">
+            <a href="${GOOGLE_REVIEW_URL}" style="display: inline-block; background-color: #cda15a; color: #050b16; font-weight: 700; font-size: 14px; text-decoration: none; padding: 12px 28px; border-radius: 8px;">Leave a review</a>
+          </div>
         `),
           text: `Thanks for choosing Elite Autocare, ${booking.name}!
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getResendClient, assertSent, BUSINESS_EMAIL, FROM_EMAIL } from "@/lib/resend";
+import { getResendClient, assertSent, BUSINESS_EMAIL, FROM_EMAIL, wrapEmailHtml, emailFieldsBox } from "@/lib/resend";
 import { ensureSchema, sql } from "@/lib/db";
 import {
   durationForPackage,
@@ -138,12 +138,28 @@ export async function POST(req: NextRequest) {
         from: FROM_EMAIL,
         to: email,
         subject: "We've received your Elite Autocare booking",
-        html: `
-        <h2>Thanks, ${name}!</h2>
-        <p>Your <strong>${packageName}</strong> booking for <strong>${date}</strong> at <strong>${startTime}</strong> (ending around ${endTime}) is confirmed.</p>
-        <p>We'll see you then — call us on 07946 089 183 if anything changes.</p>
-        <p>&mdash; Elite Autocare</p>
-      `,
+        html: wrapEmailHtml(`
+        <h2 style="margin: 0 0 12px; font-size: 22px; color: #e3c584; text-align: center;">Thanks, ${name}!</h2>
+        <p style="margin: 0; font-size: 15px; color: #c7d1e0; line-height: 1.6;">Your <strong style="color: #f5f7fa;">${packageName}</strong> booking is confirmed. We'll see you then — call us on 07946&nbsp;089&nbsp;183 if anything changes.</p>
+        ${emailFieldsBox([
+          ["Package", packageName],
+          ["Date", date],
+          ["Time", `${startTime} – ${endTime}`],
+          ["Address", address],
+        ])}
+      `),
+        text: `Thanks, ${name}!
+
+Your ${packageName} booking is confirmed.
+
+Package: ${packageName}
+Date: ${date}
+Time: ${startTime} – ${endTime}
+Address: ${address}
+
+We'll see you then — call us on 07946 089 183 if anything changes.
+
+— Elite Autocare`,
       })
     );
   } catch (err) {
