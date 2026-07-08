@@ -30,7 +30,10 @@ export const BUSINESS_EMAIL =
 export const FROM_EMAIL =
   process.env.RESEND_FROM_EMAIL || "Elite Autocare <bookings@eliteautocare.co.uk>";
 
-const SITE_URL = "https://eliteautocare.co.uk";
+// eliteautocare.co.uk's DNS isn't pointed at this Vercel app yet, so the
+// real, currently-live host for static assets like the email logo is the
+// vercel.app domain. Switch this once the custom domain is wired up.
+const SITE_URL = "https://elite-autocare.vercel.app";
 
 // Table-based layout (not divs) so it renders correctly in Outlook desktop
 // and other clients with poor CSS support, not just Gmail/Apple Mail.
