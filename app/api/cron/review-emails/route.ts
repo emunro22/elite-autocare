@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ensureSchema, sql } from "@/lib/db";
-import { getResendClient, assertSent, FROM_EMAIL, wrapEmailHtml, emailButton } from "@/lib/resend";
+import { getResendClient, assertSent, FROM_EMAIL } from "@/lib/resend";
 
 const GOOGLE_REVIEW_URL =
   process.env.GOOGLE_REVIEW_URL || "https://g.page/r/CR9jW1DER_QgEBM/review";
@@ -28,23 +28,20 @@ export async function GET(req: NextRequest) {
         await resend.emails.send({
           from: FROM_EMAIL,
           to: booking.email,
-          subject: "How did we do? Leave us a review",
-          html: wrapEmailHtml(
-            `Thanks, ${booking.name}!`,
-            `
-          <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#f5f7fa;line-height:1.6;">We hope you're happy with how your vehicle turned out today. If you have a minute, we'd really appreciate a quick Google review — it helps us a lot.</p>
-          ${emailButton(GOOGLE_REVIEW_URL, "Leave a review")}
-        `
-          ),
-          text: `Thanks for choosing Elite Autocare, ${booking.name}!
+          subject: `Your car today, ${booking.name}`,
+          html: `<p>Hi ${booking.name},</p>
+<p>Thanks for having us out today — hope the car's looking the part.</p>
+<p>If you've got a minute, a quick Google review would really help us out: <a href="${GOOGLE_REVIEW_URL}">${GOOGLE_REVIEW_URL}</a></p>
+<p>Cheers,<br />Elite Autocare</p>`,
+          text: `Hi ${booking.name},
 
-We hope you're happy with how your vehicle turned out today.
+Thanks for having us out today — hope the car's looking the part.
 
-If you have a minute, we'd really appreciate a quick Google review — it helps us a lot:
+If you've got a minute, a quick Google review would really help us out:
 ${GOOGLE_REVIEW_URL}
 
-Thank you for your support!
-— Elite Autocare`,
+Cheers,
+Elite Autocare`,
         })
       );
 
