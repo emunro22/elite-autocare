@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://eliteautocare.co.uk/sitemap.xml",
+    sitemap: "https://eliteauto-care.co.uk/sitemap.xml",
   };
 }

@@ -20,7 +20,7 @@ const body = Manrope({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://eliteautocare.co.uk"),
+  metadataBase: new URL("https://eliteauto-care.co.uk"),
   title: {
     default: "Elite Autocare | Mobile Valeting & Detailing, Glasgow",
     template: "%s | Elite Autocare",

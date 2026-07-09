@@ -28,9 +28,9 @@ export const BUSINESS_EMAIL =
 // The verified "from" address for Resend. Must be on a domain you've
 // verified in the Resend dashboard before going live.
 export const FROM_EMAIL =
-  process.env.RESEND_FROM_EMAIL || "Elite Autocare <bookings@eliteautocare.co.uk>";
+  process.env.RESEND_FROM_EMAIL || "Elite Autocare <bookings@eliteauto-care.co.uk>";
 
-// eliteautocare.co.uk's DNS isn't pointed at this Vercel app yet, so the
+// eliteauto-care.co.uk isn't pointed at this Vercel app yet, so the
 // real, currently-live host for static assets like the email logo is the
 // vercel.app domain. Switch this once the custom domain is wired up.
 const SITE_URL = "https://elite-autocare.vercel.app";
@@ -116,7 +116,7 @@ export function wrapEmailHtml(heading: string, innerHtml: string): string {
                 <div style="height:1px;background:rgba(205,161,90,0.15);margin:28px 0 20px 0;"></div>
                 <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#8ea0bc;">
                   Elite Autocare &mdash; mobile valeting &amp; detailing<br />
-                  07946 089 183 &nbsp;&bull;&nbsp; eliteautocare.co.uk
+                  07946 089 183 &nbsp;&bull;&nbsp; eliteauto-care.co.uk
                 </p>
               </td>
             </tr>

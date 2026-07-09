@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { areas } from "@/lib/areas";
 
-const baseUrl = "https://eliteautocare.co.uk";
+const baseUrl = "https://eliteauto-care.co.uk";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [

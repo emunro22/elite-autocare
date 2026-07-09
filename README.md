@@ -80,7 +80,7 @@ approximation of "evening" rather than an exact time after each job.
 
 1. Create a free account at https://resend.com
 2. Add and verify a domain you own under **Domains** (this lets you send
-   from an address like `bookings@eliteautocare.co.uk` instead of the
+   from an address like `bookings@eliteauto-care.co.uk` instead of the
    Resend sandbox address).
 3. Create an API key under **API Keys**.
 4. Add these environment variables — locally in `.env.local`, and in
@@ -89,7 +89,7 @@ approximation of "evening" rather than an exact time after each job.
    - `BUSINESS_EMAIL` — where booking/contact emails land (defaults to
      eliteautocare10@icloud.com)
    - `RESEND_FROM_EMAIL` — must be on your verified domain, e.g.
-     `Elite Autocare <bookings@eliteautocare.co.uk>`
+     `Elite Autocare <bookings@eliteauto-care.co.uk>`
 
 Until a domain is verified, Resend only allows sending to the email
 address on your own Resend account — fine for testing the form, not for
