@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import { Analytics } from "@vercel/analytics/next";
 
 const display = Outfit({
   subsets: ["latin"],
@@ -66,6 +67,7 @@ export default function RootLayout({
           <Footer />
           <WhatsAppFloat />
         </div>
+        <Analytics />
       </body>
     </html>
   );
