@@ -54,6 +54,8 @@ export default function Footer() {
             <li><Link href="/services" className="hover:text-gold-400">Services &amp; Packages</Link></li>
             <li><Link href="/areas" className="hover:text-gold-400">Areas We Cover</Link></li>
             <li><Link href="/about" className="hover:text-gold-400">About Us</Link></li>
+            <li><Link href="/blog" className="hover:text-gold-400">Blog</Link></li>
+            <li><Link href="/faq" className="hover:text-gold-400">FAQs</Link></li>
             <li><Link href="/booking" className="hover:text-gold-400">Book a Valet</Link></li>
             <li><Link href="/contact" className="hover:text-gold-400">Contact</Link></li>
           </ul>

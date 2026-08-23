@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { Analytics } from "@vercel/analytics/next";
+import { buildLocalBusinessSchema } from "@/lib/structuredData";
 
 const display = Outfit({
   subsets: ["latin"],
@@ -58,9 +59,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const localBusinessSchema = buildLocalBusinessSchema();
+
   return (
     <html lang="en-GB" className={`${display.variable} ${body.variable}`}>
       <body className="font-body bg-navy-900 text-mist-100 antialiased selection:bg-gold-500">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
         <div className="relative min-h-screen bg-navy-900 bg-navy-radial">
           <Navbar />
           <main>{children}</main>

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { areas } from "@/lib/areas";
+import { blogPosts } from "@/lib/blog";
 
 const baseUrl = "https://eliteauto-care.co.uk";
 
@@ -11,6 +12,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/booking`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/gallery`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${baseUrl}/about`, changeFrequency: "yearly", priority: 0.5 },
+    { url: `${baseUrl}/faq`, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${baseUrl}/blog`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${baseUrl}/contact`, changeFrequency: "yearly", priority: 0.5 },
   ];
 
@@ -20,5 +23,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...areaRoutes];
+  const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    changeFrequency: "yearly",
+    priority: 0.5,
+  }));
+
+  return [...staticRoutes, ...areaRoutes, ...blogRoutes];
 }

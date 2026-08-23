@@ -11,7 +11,7 @@ export default function FooterLogo() {
     <span className="relative h-10 w-10 shrink-0">
       <Image
         src="/images/logo-badge.png"
-        alt=""
+        alt="Elite Autocare"
         fill
         sizes="40px"
         className="object-contain"

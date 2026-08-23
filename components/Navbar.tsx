@@ -15,6 +15,8 @@ const links = [
   { href: "/gallery", label: "Gallery" },
   { href: "/areas", label: "Areas" },
   { href: "/about", label: "About" },
+  { href: "/blog", label: "Blog" },
+  { href: "/faq", label: "FAQs" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -85,7 +87,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-10 md:flex">
+        <nav className="hidden items-center gap-10 xl:flex">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -106,7 +108,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-6 md:flex">
+        <div className="hidden items-center gap-6 xl:flex">
           <a
             href="tel:07946089183"
             className="flex items-center gap-2 text-base text-mist-300 hover:text-gold-400"
@@ -125,7 +127,7 @@ export default function Navbar() {
         <button
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
-          className="relative z-10 text-mist-100 md:hidden"
+          className="relative z-10 text-mist-100 xl:hidden"
           onClick={() => setOpen((v) => !v)}
         >
           {open ? <X size={30} /> : <Menu size={30} />}
@@ -140,7 +142,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 bottom-0 top-20 z-40 overflow-y-auto border-t border-gold-500/10 bg-navy-900 md:hidden"
+            className="fixed inset-x-0 bottom-0 top-20 z-40 overflow-y-auto border-t border-gold-500/10 bg-navy-900 xl:hidden"
           >
             <div className="container-elite flex flex-col gap-1 py-8">
               {links.map((link, i) => (

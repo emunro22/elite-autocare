@@ -9,6 +9,11 @@ export function generateStaticParams() {
   return areas.map((area) => ({ slug: area.slug }));
 }
 
+function truncate(text: string, max: number): string {
+  if (text.length <= max) return text;
+  return `${text.slice(0, max - 1).trimEnd()}…`;
+}
+
 export function generateMetadata({
   params,
 }: {
@@ -18,7 +23,10 @@ export function generateMetadata({
   if (!area) return {};
   return {
     title: `Mobile Valeting in ${area.name}`,
-    description: `Elite Autocare offers mobile car valeting and detailing in ${area.name}. ${area.blurb}`,
+    description: truncate(
+      `Mobile car valeting and detailing in ${area.name}. ${area.blurb}`,
+      155
+    ),
     keywords: [
       `mobile valeting ${area.name}`,
       `car valeting ${area.name}`,
@@ -49,8 +57,11 @@ export default function AreaDetailPage({
         Mobile valeting in {area.name}
       </h1>
       <p className="mt-5 max-w-2xl text-base leading-relaxed text-mist-300">
-        {area.blurb} We bring our own water and power, so all we need is a
-        space to park and access to your car.
+        {area.intro}
+      </p>
+      <p className="mt-3 max-w-2xl text-base leading-relaxed text-mist-300">
+        We bring our own water and power, so all we need is a space to park
+        and access to your car.
       </p>
 
       <div className="mt-14 grid gap-8 lg:grid-cols-3">
