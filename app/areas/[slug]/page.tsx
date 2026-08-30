@@ -27,6 +27,7 @@ export function generateMetadata({
       `Mobile car valeting and detailing in ${area.name}. ${area.blurb}`,
       155
     ),
+    alternates: { canonical: `/areas/${area.slug}` },
     keywords: [
       `mobile valeting ${area.name}`,
       `car valeting ${area.name}`,

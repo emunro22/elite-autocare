@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Guides and advice from Elite Autocare — wax vs sealant, does mobile valeting work in winter, how often to valet your car, and more.",
+  alternates: { canonical: "/blog" },
   keywords: [
     "car valeting advice",
     "wax vs sealant",

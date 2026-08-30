@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { Analytics } from "@vercel/analytics/next";
 import { buildLocalBusinessSchema } from "@/lib/structuredData";
+import CookieConsent from "@/components/CookieConsent";
 
 const display = Outfit({
   subsets: ["latin"],
@@ -29,6 +30,7 @@ export const metadata: Metadata = {
   },
   description:
     "Professional mobile valeting and detailing across Glasgow. Silver, Gold and Platinum packages, machine polish and ceramic coating. Book online today.",
+  alternates: { canonical: "/" },
   keywords: [
     "mobile valeting Glasgow",
     "car valeting Glasgow",
@@ -74,6 +76,7 @@ export default function RootLayout({
           <Footer />
           <WhatsAppFloat />
         </div>
+        <CookieConsent />
         <Analytics />
       </body>
     </html>

@@ -15,6 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/faq`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${baseUrl}/blog`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${baseUrl}/contact`, changeFrequency: "yearly", priority: 0.5 },
+    { url: `${baseUrl}/privacy`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${baseUrl}/terms`, changeFrequency: "yearly", priority: 0.2 },
   ];
 
   const areaRoutes: MetadataRoute.Sitemap = areas.map((area) => ({

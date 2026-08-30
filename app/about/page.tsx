@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Elite Autocare is a mobile valeting and detailing team based in Erskine, covering Glasgow and Central Scotland with careful, consistent work on every car.",
+  alternates: { canonical: "/about" },
   keywords: [
     "mobile valeting company Glasgow",
     "car detailing team Glasgow",

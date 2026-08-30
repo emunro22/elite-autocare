@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Areas We Cover",
   description:
     "Elite Autocare provides mobile valeting and detailing across Glasgow, Renfrewshire, Lanarkshire and the surrounding Central Scotland area — see the full list of towns we cover.",
+  alternates: { canonical: "/areas" },
   keywords: [
     "mobile valeting areas Glasgow",
     "car valeting near me",

@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Contact",
   description:
     "Get in touch with Elite Autocare for questions, quotes on machine polish and ceramic coating, or to check we cover your area of Glasgow or Central Scotland.",
+  alternates: { canonical: "/contact" },
   keywords: [
     "contact mobile valeting Glasgow",
     "car valet quote Glasgow",

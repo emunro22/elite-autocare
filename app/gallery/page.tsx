@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Gallery",
   description:
     "Before and after photos from Elite Autocare mobile valets across Glasgow and Central Scotland. Drag each slider to see the transformation.",
+  alternates: { canonical: "/gallery" },
   keywords: [
     "car valeting before and after",
     "mobile detailing photos Glasgow",

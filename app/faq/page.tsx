@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "FAQs",
   description:
     "Answers to common questions about Elite Autocare's mobile valeting service — wax vs sealant, winter valeting, booking, water and power, and more.",
+  alternates: { canonical: "/faq" },
   keywords: [
     "mobile valeting FAQ",
     "wax vs sealant",

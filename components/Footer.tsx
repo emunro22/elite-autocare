@@ -78,6 +78,10 @@ export default function Footer() {
       <div className="border-t border-gold-500/10 py-6">
         <div className="container-elite flex flex-col items-center justify-between gap-3 text-xs text-mist-500 md:flex-row">
           <span>&copy; {new Date().getFullYear()} Elite Autocare. All rights reserved.</span>
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className="hover:text-gold-400">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-gold-400">Terms &amp; Conditions</Link>
+          </div>
           <span>Built with care in Glasgow.</span>
         </div>
       </div>
